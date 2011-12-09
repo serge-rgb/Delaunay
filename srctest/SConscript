@@ -1,0 +1,16 @@
+Import('env')
+test_env = env.Clone()
+test_env['CXXFLAGS']+=' -I./src -I./include/ -I./build -I./lib '
+test_env['LINKFLAGS']+=' -L./lib -L./build '
+
+test_env.Append(LIBS = ['gtest', 'pthread', 'Delaunay'])
+
+sources = [
+	'MeshTest.cc',
+	'RendererTest.cc',
+	'Main.cc'
+	]
+
+buildtest = test_env.Program('Test', sources)
+
+Default(buildtest)

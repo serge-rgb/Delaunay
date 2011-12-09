@@ -1,0 +1,48 @@
+
+Import('env')
+
+build_env = env.Clone()
+try:
+	import multiprocessing
+	num_cpus = multiprocessing.cpu_count()
+except:
+	num_cpus = 1
+
+#Make builds faster..
+SetOption("num_jobs", num_cpus)
+
+lib_sources = [
+        'Entity.cc',
+        'Interface/GLWidget.cc',
+        'Interface/Linux.cc',
+        'Interface/Window.cc',
+        'Mesh.cc',
+        'Renderer.cc',
+        'Vec.cc'
+        ]
+        
+bin_sources = [
+	'Main.cc', 
+	'libDelaunay.a']
+        
+# default: debug
+mode = ARGUMENTS.get('mode', 'debug')
+if not mode in ['debug', 'release']:
+        print "Error: expected mode to be 'debug' or 'release'"
+        Exit(-1)
+#clang uses pch..
+build_env['GCHSUFFIX'] = '.pch'
+build_env['Gch'] = build_env.Gch('common.h')[0]
+build_env['CXXFLAGS']+=' -I./include -include build/common.h '
+build_env.Append(LIBS=['gtest'])
+
+if mode == 'release':                                
+        build_env['CXXFLAGS']+=' -O3 -DNDEBUG '
+if mode == 'debug':
+        build_env['CXXFLAGS']+=' -O0 -g '
+         
+build_env.Library('Delaunay',lib_sources)
+build = build_env.Program('Delaunay',bin_sources)
+Default(build)
+
+#Clean(lib,"../build")

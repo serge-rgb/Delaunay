@@ -1,0 +1,40 @@
+================================================================================
+Delaunay:
+
+Short implementation of the Delaunay triangulation in C++.
+
+Requires:
+Linux 
+Qt4
+Clang (>3.0)
+SCons
+
+
+Build / Usage:
+a) $> scons build
+b) $> scons run
+c) Click on the window to add points and see the triangulation =)
+d) Press the "R" key to clear the mesh.
+        ---
+        If you want to write/run tests:
+        You need: Linux amd64 or custom googletest libs
+        build with [$> scons] or [$> scons buildtest]
+        ---
+
+================================================================================
+
+This program is a simple implementation of an incremental algorithm to obtain
+ the Delaunay triangulation of a set of points.
+
+This is a part of a closed source application but it is a cool demo and might
+be useful so I wanted to share it with the GPL license.
+
+It is O(n^2). After profiling with the intended use (clicking on the screen..)
+  I realized that less than 30% of the generation time is spent on 
+  point location while more than 70% is spent splitting triangles. An O(nlogn) 
+  improvement would be negligible for the use that I'll give to this code.
+
+Note:
+        Includes a hacked gch.py scons tool for precompiled clang headers.
+
+================================================================================
