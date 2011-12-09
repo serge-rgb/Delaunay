@@ -1,7 +1,8 @@
 ================================================================================
 Delaunay:
 
-Short implementation of the Delaunay triangulation in C++.
+Simple implementation of the Delaunay triangulation in C++.
+Video: http://www.youtube.com/watch?v=bzQWU2Y564w
 
 Requires:
 Linux 
