@@ -42,19 +42,9 @@ public:
 
     /**
      * @param v
-     * @return Distance to v
+     * @return Pseudo-distance used for triangle bound gen.
      */
-    double Distance2d(Vec const v) const;
-
-    /**
-     * Calculates the norm. The vector must have z=0.
-     */
-    double Norm2d() const;
-
-    /**
-     *  Make the vector unit-length. Currently only works on 2d vectors.
-     */
-    Vec const Normalize() const;
+    double Magnitude2d(Vec const v) const;
 
     double x;
     double y;

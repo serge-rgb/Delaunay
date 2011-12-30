@@ -38,19 +38,7 @@ Vec& Vec::operator =(const Vec &v) {
     return *this;
 }
 
-double Vec::Norm2d() const {
-    assert(z == 0);
-    return Distance2d(*this);
-}
-
-const Vec Vec::Normalize() const {
-    assert(z == 0);
-    const double norm = Norm2d();
-    Vec result(x / norm, y / norm);
-    return result;
-}
-
-double Vec::Distance2d(const Vec v) const {
+double Vec::Magnitude2d(const Vec v) const {
     assert(z == 0 && v.z == 0);
     return sqrt(x * v.x + y * v.y);
 }

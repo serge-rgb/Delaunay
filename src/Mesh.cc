@@ -127,7 +127,7 @@ vector<Vec> Mesh::GetBoundingTriangle() {
     // This is the radius of a circle that contains all points.
     double radius = 0;
     for (Vec v : verts) {
-        double const newDist = center.Distance2d(v);
+        double const newDist = center.Magnitude2d(v);
         if (newDist > radius) {
             radius = newDist;
         }
@@ -137,7 +137,7 @@ vector<Vec> Mesh::GetBoundingTriangle() {
     double const sin45 = 0.707106781; // cos(pi/4) = sin(pi/4) = sqrt(2)/2
 
     // Direction vector from b to a.
-    Vec dir = Vec(radius * sin45, radius * (sin45 - 1) - epsilon).Normalize();
+    Vec dir = Vec(radius * sin45, radius * (sin45 - 1) - epsilon);//.Normalize();
 
     // The magnitude of the vector from b to a
     const double scale = -2 * (radius + epsilon) / dir.y;
